@@ -1,0 +1,165 @@
+{% extends 'medical/base.html' %}
+{% load static %}
+{% load FilterExtension %}
+
+{% block content %}
+
+<!-- Start Slider Section -->
+    <div id="slider" class="slider-height">
+        <div class="flexslider slider-wrapper">
+            <ul class="slides">
+                <li>
+                    <div class="slider-info">
+                        <h1 class="animated fadeInDown">Современное оборудование</h1>
+                        <p class="animated fadeInDown">Благодаря большому количеству инновационных цифровых решений, которые ежедневно появляются у нас благодаря технологиям, был достигнут ряд достижений в области сбора данных, лечения, исследований и медицинских устройств.</p>
+                    </div>
+                    <img src="{% static 'images/slider-1.jpg' %}" alt="" />
+                    <div class="slider-button slider-appointment">
+                        <a href="{% url 'medical:create_appointment' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect animated fadeInUp">Запись на прием<i class="fa fa-flag-checkered"></i></a>
+                    </div>
+                </li>
+                <li>
+                    <div class="slider-info">
+                        <h2>О нашем центре</h2>
+                        <p>Частная клиника предлагает своим клиентам сервис высочайшего уровня, современные технологии и медицинское обслуживание по западным стандартам. </p>
+                    </div>
+                    <img src="{% static 'images/slider-2.jpg' %}" alt="" />
+                    <div class="slider-button slider-appointment">
+                        <a href="{% url 'medical:create_appointment' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect animated fadeInUp">Запись на прием<i class="fa fa-external-link"></i></a>
+                    </div>
+                </li>
+                <li>
+                    <div class="slider-info">
+                        <h2>Работа без выходных</h2>
+                        <p>Мы работаем 24 часа в сутки, 7 дней в неделю.</p>
+                    </div>
+                    <img src="{% static 'images/slider-3.jpg' %}" alt="" />
+                    <div class="slider-button slider-appointment">
+                        <a href="{% url 'medical:create_appointment' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect animated fadeInUp">Запись на прием<i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div><!-- End Slider Section -->
+    <!-- Start Service Section -->
+    <div id="hm-service" class="layer-stretch">
+        <div class="layer-wrapper">
+            <div class="layer-ttl">
+                <h3>Наши услуги</h3>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="service-card">
+                        <i class="fa fa-user-md"></i>
+                        <h5>Отделения неотложной помощи</h5>
+                        <p class="paragraph-small paragraph-black">Первичная медико-санитарная помощь оказывается бесплатно в амбулаторных условиях и в условиях дневного стационара, в плановой и неотложной формах, является основой системы оказания медицинской помощи и включает в себя мероприятия по профилактике, диагностике, лечению заболеваний и состояний, медицинской реабилитации, наблюдению за течением беременности, формированию здорового образа жизни и санитарно-гигиеническому просвещению населения.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="service-card">
+                        <i class="fa fa-shield"></i>
+                        <h5>Лучшая инфраструктура</h5>
+                        <p class="paragraph-small paragraph-black">По показателю развития инфраструктуры центр медицинской диагностики победил, набрав 83,2 балла, второе и третье место заняли Гонконг (78,16 балла) и Париж (76,3 балла). Уровень качества обслуживания в нашем центре, исследователи оценили в 68,33 балла, наша чудесная клиника обогнала Сингапур (67,21 балла) и Гонконг (63,43 балла). В глобальном же рейтинге топовых клиник мы находимся на третьем месте, уступив Сингапуру и Торонто. </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="service-card">
+                        <i class="fa fa-stethoscope"></i>
+                        <h5>Анализы</h5>
+                        <p class="paragraph-small paragraph-black">Уникальный сервис, что бы сдать анализы ни куда ходить не нужно. Наша группа по сбору анализов приедет к Вам. Лучшие специалисты возьмут у вас все необходимые анализы и тут же предоставят результаты.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Service Section -->
+    <!-- Start Doctor Section -->
+    <div class="parallax-background parallax-background-2">
+        <div class="layer-stretch">
+            <div class="layer-wrapper">
+                <div class="layer-ttl layer-ttl-white">
+                    <h3>Наши доктора</h3>
+                </div>
+                <div class="layer-container">
+                    <div id="hm-doctor-slider" class="owl-carousel owl-theme theme-owl-dot">
+
+                        {% if doctors %}
+                            {% for doctor in doctors %}
+                            <div class="hm-doctor">
+                                <img class="img-responsive" src="{{ doctor.owner.avatar|mediapath }}" alt="">
+                                <h6>{{ doctor.owner.first_name }} {{ doctor.owner.last_name }}</h6>
+                                <p>{{ doctor.post.name }}</p>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <h1>Пока никто не устроился к нам на работу</h1>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- End Doctor Section -->
+<!-- Start Blog Section -->
+    <div id="hm-blog" class="layer-stretch">
+        <div class="layer-wrapper layer-bottom-10">
+            <div class="layer-ttl">
+                <h3>Последние публикации блога</h3>
+            </div>
+            <div class="row">
+                {% for blog in blog_list %}
+                <div class="col-md-6">
+                    <div class="blog-list-block">
+                        <div class="blog-list-picture">
+                            <div class="theme-img theme-img-scalerotate">
+                                <img src="{{ blog.image|mediapath }}" alt="">
+                            </div>
+                        </div>
+                        <div class="blog-list-ttl">
+                            <h3><a href="{% url 'blog:view_blog' blog.slug %}">{{ blog.name }}</a></h3>
+                        </div>
+                        <div class="blog-list-meta">
+                            <p>Автор: {{ blog.owner.first_name }} {{ blog.owner.last_name }}<BR>Дата публикации: {{ blog.date_time }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+<!-- End Blog Section -->
+<!-- Start Testimonial Section -->
+    <div id="testimonial" class="parallax-background parallax-background-3">
+        <div class="layer-stretch">
+            <div class="layer-wrapper">
+                <div class="layer-ttl layer-ttl-white">
+                    <h3>Что о нас пишут</h3>
+                </div>
+                <div class="layer-container">
+                    <div id="testimonial-slider" class="owl-carousel owl-theme theme-owl-dot">
+
+                        {% if feedbacks %}
+                            {% for feedback in feedbacks %}
+                            <div class="testimonial-block">
+                                <img class="img-responsive" style="width: 30%; height: 30%;" src="{{ feedback.owner.avatar|mediapath }}" alt="{{ feedback.owner.first_name }} {{ feedback.owner.last_name }}">
+                                <div class="paragraph-medium paragraph-white">
+                                    <i class="fa fa-quote-left"></i>
+                                    {{ feedback.text }}
+                                </div>
+                                <a>{{ feedback.owner.first_name }} {{ feedback.owner.last_name }}</a>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <h1>Отзывов пока нет, будьте первым</h1>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- End Testimonial Section -->
+
+{% endblock %}
